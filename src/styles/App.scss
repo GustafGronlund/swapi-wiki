@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: monospace;
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(
+    to right top,
+    #4c596f,
+    #4c5e7a,
+    #4b6386,
+    #496991,
+    #466e9d,
+    #4a6493,
+    #4d5a88,
+    #4f517c,
+    #483a57,
+    #372737,
+    #21171c,
+    #000000
+  );
+}
