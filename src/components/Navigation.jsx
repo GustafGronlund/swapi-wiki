@@ -6,10 +6,10 @@ const Navigation = () => {
       <h2>🛸 SWAPI Wiki</h2>
       <ul>
         <li>
-          <a href="">item 1</a>
+          <a>Films</a>
         </li>
         <li>
-          <a href="">item 2</a>
+          <a>People</a>
         </li>
       </ul>
     </nav>
