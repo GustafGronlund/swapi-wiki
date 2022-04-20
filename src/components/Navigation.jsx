@@ -1,4 +1,5 @@
 import "../styles/Navigation.scss";
+import { Link, NavLink } from "react-router-dom";
 
 const Navigation = () => {
   return (
@@ -6,10 +7,14 @@ const Navigation = () => {
       <h2>🛸 SWAPI Wiki</h2>
       <ul>
         <li>
-          <a>Films</a>
+          <a as={NavLink} end to="/films">
+            Films
+          </a>
         </li>
         <li>
-          <a>People</a>
+          <a as={NavLink} end to="/people">
+            People
+          </a>
         </li>
       </ul>
     </nav>
