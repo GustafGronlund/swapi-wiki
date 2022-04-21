@@ -1,21 +1,14 @@
+import React from "react";
 import "../styles/Navigation.scss";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
     <nav>
-      <h2>🛸 SWAPI Wiki</h2>
+      <Link to="/">🛸 SWAPI Wiki</Link>
       <ul>
-        <li>
-          <a as={NavLink} end to="/films">
-            Films
-          </a>
-        </li>
-        <li>
-          <a as={NavLink} end to="/people">
-            People
-          </a>
-        </li>
+        <Link to="/films">Films</Link>
+        <Link to="/people">People</Link>
       </ul>
     </nav>
   );
