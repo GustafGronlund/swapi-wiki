@@ -6,8 +6,6 @@ import axios from "axios";
 import extractFromUrl, { Url } from "extract-from-url";
 
 const FilmsPage = () => {
-  const params = useParams();
-  const [posts, setPosts] = useState([]);
   const [films, setFilms] = useState("");
   const [loadingData, setLoadingDataStatus] = useState(true);
 
@@ -38,10 +36,9 @@ const FilmsPage = () => {
     return (
       <>
         <main>
-          <section>
+          <section className="filmspage-container">
             {films &&
               films.map((film) => {
-                const urlParts = extractFromUrl(film.url);
                 const { path } = extractFromUrl(film.url);
                 let uniquePath = path.substring(
                   path.indexOf("/") + 11,
@@ -49,7 +46,7 @@ const FilmsPage = () => {
                 );
                 console.log(uniquePath);
                 return (
-                  <div className="film-styling" key={film.episode_id}>
+                  <div key={film.episode_id}>
                     <h1>{film.title}</h1>
                     <div>
                       <p>Episode: {film.episode_id}</p>
@@ -65,8 +62,6 @@ const FilmsPage = () => {
       </>
     );
   }
-
-  console.log(films);
 };
 
 export default FilmsPage;

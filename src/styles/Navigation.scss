@@ -3,8 +3,17 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10rem 0 10rem;
+  padding: 0 5rem 0 5rem;
   height: 5rem;
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    transition: 0.3s all ease-in-out;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
   h2 {
     color: #ffe81e;
     cursor: pointer;
@@ -14,12 +23,16 @@ nav {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    width: 10rem;
+    width: 15rem;
     list-style-type: none;
     a {
       color: white;
       text-decoration: none;
       cursor: pointer;
+      transition: 0.3s all ease-in-out;
+      &:hover {
+        opacity: 0.6;
+      }
     }
   }
 }

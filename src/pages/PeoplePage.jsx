@@ -1,14 +1,11 @@
 import "../styles/PeoplePage.scss";
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SWApi from "../services/SWApi";
-import axios from "axios";
 import extractFromUrl, { Url } from "extract-from-url";
 
 const PeoplePage = () => {
-  const params = useParams();
   const [count, setCount] = useState(1);
-  const [posts, setPosts] = useState([]);
   const [people, setPeople] = useState("");
   const [loadingData, setLoadingDataStatus] = useState(true);
 
@@ -19,6 +16,16 @@ const PeoplePage = () => {
     setPeople(data.results);
     setLoadingDataStatus(false);
   };
+
+  if (count <= 0) {
+    setCount(9);
+    console.log("nu händer något");
+  }
+
+  if (count === 10) {
+    setCount(1);
+    console.log("nu händer något");
+  }
 
   const changePage = async (e) => {
     if (e.target.className === "left-page") {
@@ -84,7 +91,7 @@ const PeoplePage = () => {
           <span onClick={changePage} className="left-page">
             left
           </span>
-          <span className="left-page">{count} / 10 </span>
+          <span className="left-page">{count} / 9 </span>
           <span onClick={changePage} className="right-page">
             right
           </span>

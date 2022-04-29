@@ -1,7 +1,7 @@
+import "../styles/FilmPage.scss";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SWApi from "../services/SWApi";
-import "../styles/FilmPage.scss";
 import extractFromUrl, { Url } from "extract-from-url";
 
 const Film = () => {
@@ -34,7 +34,7 @@ const Film = () => {
               <p>Release date: {film.release_date}</p>
               <p>Number of characters: {film.characters.length}</p>
             </div>
-            <div className="character-container">
+            <div className="film-container">
               {film.characters.map((characterURL) => {
                 const urlParts = extractFromUrl(characterURL);
                 const { path } = extractFromUrl(characterURL);
@@ -44,7 +44,7 @@ const Film = () => {
                 );
                 console.log(uniquePath);
                 return (
-                  <div className="character-styling" key={characterURL}>
+                  <div className="film-styling" key={characterURL}>
                     <Link to={`/people/${uniquePath}`}>
                       Character: {uniquePath}
                     </Link>

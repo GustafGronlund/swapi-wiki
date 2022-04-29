@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SWApi from "../services/SWApi";
-import "../styles/FilmPage.scss";
+import "../styles/OnePeoplePage.scss";
+import extractFromUrl, { Url } from "extract-from-url";
 
 const Person = () => {
   let { id } = useParams();
@@ -31,16 +32,23 @@ const Person = () => {
               <p>Height: {person.height}</p>
               <p>Homeworld: {person.homeworld}</p>
             </div>
-            <div className="character-container">
-              {/* {person.films.map((filmURL) => {
-                //   const characterId = getIdFromUrl(characterURL);
-                console.log(filmURL);
+            <div className="people-container">
+              {person.films.map((characterURL) => {
+                const urlParts = extractFromUrl(characterURL);
+                const { path } = extractFromUrl(characterURL);
+                let uniquePath = path.substring(
+                  path.indexOf("/") + 11,
+                  path.lastIndexOf("/")
+                );
+                console.log(uniquePath);
                 return (
-                  <div className="character-styling" key={filmURL}>
-                    <Link to={`/people/${filmURL}`}>Film links</Link>
+                  <div className="people-styling" key={characterURL}>
+                    <Link to={`/films/${uniquePath}`}>
+                      Movies: {uniquePath}
+                    </Link>
                   </div>
                 );
-              })} */}
+              })}
             </div>
           </>
         )}
