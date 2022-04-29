@@ -1,0 +1,25 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  width: 80rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.film-styling {
+  border: 1px solid black;
+  height: 20rem;
+  width: 15rem;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  font-size: 1.5em;
+}

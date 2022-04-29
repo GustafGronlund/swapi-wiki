@@ -1,0 +1,29 @@
+section {
+  height: 90vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.main-container {
+  height: 40rem;
+  border: 1px solid black;
+  width: 25rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.character-container {
+  height: 30rem;
+  overflow-y: scroll;
+}
+
+.character-styling {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  background: black;
+  border: 1px solid yellow;
+}

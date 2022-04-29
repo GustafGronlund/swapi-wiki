@@ -1,32 +1,64 @@
+import "../styles/FilmsPage.scss";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import SWApi from "../services/SWApi";
+import axios from "axios";
 
 const FilmsPage = () => {
-  const [getMovies, setMovies] = useState();
+  const params = useParams();
+  const [posts, setPosts] = useState([]);
+  const [films, setFilms] = useState("");
+  const [loadingData, setLoadingDataStatus] = useState(true);
 
-  const getStarWarsFilms = async () => {
+  const fetchFilms = async () => {
     const data = await SWApi.getFilms();
-    setMovies(data.results);
+    console.log("Hej här är datan: ", data);
+    setFilms(data.data.results);
+    setLoadingDataStatus(false);
   };
 
   useEffect(() => {
-    getStarWarsFilms();
+    fetchFilms();
   }, []);
 
-  console.log("Mina filmer", getMovies);
+  if (loadingData === true) {
+    return (
+      <>
+        <main>
+          <section>
+            <h1>Data laddas (brukar gå långsamt)</h1>
+          </section>
+        </main>
+      </>
+    );
+  }
 
-  return (
-    <>
-      <main>
-        <section>
-          {/* {getMovies.map((film) => {
-            return <p>im a film</p>;
-          })} */}
-        </section>
-      </main>
-    </>
-  );
+  if (loadingData === false) {
+    return (
+      <>
+        <main>
+          <section>
+            {films &&
+              films.map((film) => {
+                return (
+                  <div className="film-styling" key={film.episode_id}>
+                    <h1>{film.title}</h1>
+                    <div>
+                      <p>Episode: {film.episode_id}</p>
+                      <p>Release date: {film.release_date}</p>
+                      <p>Number of characters: {film.characters.length}</p>
+                      <Link to={`/films/${film.episode_id}/`}>Läs mer</Link>
+                    </div>
+                  </div>
+                );
+              })}
+          </section>
+        </main>
+      </>
+    );
+  }
+
+  console.log(films);
 };
 
 export default FilmsPage;
