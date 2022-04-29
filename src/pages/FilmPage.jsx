@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SWApi from "../services/SWApi";
 import "../styles/FilmPage.scss";
+import extractFromUrl, { Url } from "extract-from-url";
 
 const Film = () => {
   let { id } = useParams();
@@ -35,13 +36,18 @@ const Film = () => {
             </div>
             <div className="character-container">
               {film.characters.map((characterURL) => {
-                //   const characterId = getIdFromUrl(characterURL);
-                console.log(characterURL);
+                const urlParts = extractFromUrl(characterURL);
+                const { path } = extractFromUrl(characterURL);
+                let uniquePath = path.substring(
+                  path.indexOf("/") + 12,
+                  path.lastIndexOf("/")
+                );
+                console.log(uniquePath);
                 return (
                   <div className="character-styling" key={characterURL}>
-                    <Link
-                      to={`/people/${characterURL}`}
-                    >{`Character: ${characterURL}`}</Link>
+                    <Link to={`/people/${uniquePath}`}>
+                      Character: {uniquePath}
+                    </Link>
                   </div>
                 );
               })}

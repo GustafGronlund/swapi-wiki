@@ -13,8 +13,9 @@ const PeoplePage = () => {
   const [loadingData, setLoadingDataStatus] = useState(true);
 
   const fetchPeople = async () => {
-    const data = await SWApi.getPeople(1);
+    const data = await SWApi.nextPagePeople(count);
     console.log("Hej här är datan: ", data);
+    setPeople("");
     setPeople(data.results);
     setLoadingDataStatus(false);
   };
@@ -23,9 +24,13 @@ const PeoplePage = () => {
     if (e.target.className === "left-page") {
       setCount(count - 1);
       console.log("vänster");
+      setLoadingDataStatus(true);
+      fetchPeople();
     } else {
       setCount(count + 1);
       console.log("höger");
+      setLoadingDataStatus(true);
+      fetchPeople();
     }
   };
 
@@ -53,9 +58,13 @@ const PeoplePage = () => {
         <main>
           <section>
             {people.map((character) => {
-              const urlParts: Url = extractFromUrl(character.url);
-              console.log(urlParts);
-              let peopleID = character.url;
+              const urlParts = extractFromUrl(character.url);
+              const { path } = extractFromUrl(character.url);
+              let uniquePath = path.substring(
+                path.indexOf("/") + 12,
+                path.lastIndexOf("/")
+              );
+              // console.log(uniquePath);
               return (
                 <div className="film-styling" key={character.created}>
                   <h1>{character.name}</h1>
@@ -65,7 +74,7 @@ const PeoplePage = () => {
                     <p>In: {character.films.length} films</p>
                     {/* <Link to={`/films/${film.episode_id}/`}>Läs mer</Link> */}
                   </div>
-                  <Link to={`/people/1`}>Read more</Link>
+                  <Link to={`/people/${uniquePath}`}>Read more</Link>
                 </div>
               );
             })}
@@ -73,8 +82,9 @@ const PeoplePage = () => {
         </main>
         <footer>
           <span onClick={changePage} className="left-page">
-            {count}
+            left
           </span>
+          <span className="left-page">{count} / 10 </span>
           <span onClick={changePage} className="right-page">
             right
           </span>

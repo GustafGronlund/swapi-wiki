@@ -16,6 +16,11 @@ const getPeople = async () => {
   }
 };
 
+const nextPagePeople = async (id) => {
+  const res = await axios.get(`${BASE_URL}people/?page=${id}`);
+  return res.data;
+};
+
 const getSinglePerson = async (id) => {
   const res = await axios.get(`${BASE_URL}/people/${id}`);
   return res.data;
@@ -32,4 +37,5 @@ export default {
   getPeople,
   getSinglePerson,
   getSingleFilm,
+  nextPagePeople,
 };

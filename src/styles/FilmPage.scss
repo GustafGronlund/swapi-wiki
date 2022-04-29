@@ -16,14 +16,24 @@ section {
 }
 
 .character-container {
-  height: 30rem;
+  height: 40rem;
+  width: 25rem;
   overflow-y: scroll;
-}
-
-.character-styling {
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  background: black;
-  border: 1px solid yellow;
+  .character-styling {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    background: black;
+    padding-left: 1rem;
+    justify-content: center;
+    transition: 0.3s all ease-in-out;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+  }
 }

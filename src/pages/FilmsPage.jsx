@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import SWApi from "../services/SWApi";
 import axios from "axios";
+import extractFromUrl, { Url } from "extract-from-url";
 
 const FilmsPage = () => {
   const params = useParams();
@@ -40,6 +41,13 @@ const FilmsPage = () => {
           <section>
             {films &&
               films.map((film) => {
+                const urlParts = extractFromUrl(film.url);
+                const { path } = extractFromUrl(film.url);
+                let uniquePath = path.substring(
+                  path.indexOf("/") + 11,
+                  path.lastIndexOf("/")
+                );
+                console.log(uniquePath);
                 return (
                   <div className="film-styling" key={film.episode_id}>
                     <h1>{film.title}</h1>
@@ -47,7 +55,7 @@ const FilmsPage = () => {
                       <p>Episode: {film.episode_id}</p>
                       <p>Release date: {film.release_date}</p>
                       <p>Number of characters: {film.characters.length}</p>
-                      <Link to={`/films/${film.episode_id}/`}>Läs mer</Link>
+                      <Link to={`/films/${uniquePath}/`}>Läs mer</Link>
                     </div>
                   </div>
                 );
