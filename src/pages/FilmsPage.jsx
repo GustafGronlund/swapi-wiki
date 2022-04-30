@@ -52,7 +52,7 @@ const FilmsPage = () => {
                       <p>Episode: {film.episode_id}</p>
                       <p>Release date: {film.release_date}</p>
                       <p>Number of characters: {film.characters.length}</p>
-                      <Link to={`/films/${uniquePath}/`}>Läs mer</Link>
+                      <Link to={`/films/${uniquePath}/`}>Read more</Link>
                     </div>
                   </div>
                 );
