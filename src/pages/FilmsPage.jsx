@@ -25,7 +25,7 @@ const FilmsPage = () => {
       <>
         <main>
           <section>
-            <h1>Data laddas (brukar gå långsamt)</h1>
+            <h1>Loading (can be slow sometimes)</h1>
           </section>
         </main>
       </>

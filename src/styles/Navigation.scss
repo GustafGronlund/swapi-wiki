@@ -5,8 +5,11 @@ nav {
   align-items: center;
   padding: 0 5rem 0 5rem;
   height: 5rem;
+  img {
+    width: 8rem;
+  }
   a {
-    color: white;
+    color: #ffc501;
     text-decoration: none;
     font-size: 1.5em;
     transition: 0.3s all ease-in-out;
@@ -23,10 +26,10 @@ nav {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    width: 15rem;
+    width: 10rem;
     list-style-type: none;
     a {
-      color: white;
+      color: #ffc501;
       text-decoration: none;
       cursor: pointer;
       transition: 0.3s all ease-in-out;

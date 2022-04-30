@@ -11,7 +11,7 @@ const HomePage = () => {
         </div>
         <div className="info-box">
           <p>
-            Hello!
+            <span className="hello-text">Hello! 🚀</span>
             <br></br>
             This is an project created with React.
             <br></br>

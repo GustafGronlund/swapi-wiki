@@ -52,7 +52,7 @@ const PeoplePage = () => {
       <>
         <main>
           <section>
-            <h1>Data laddas (brukar gå långsamt)</h1>
+            <h1>Loading (can be slow sometimes)</h1>
           </section>
         </main>
       </>
@@ -91,7 +91,7 @@ const PeoplePage = () => {
           <span onClick={changePage} className="left-page">
             left
           </span>
-          <span className="left-page">{count} / 9 </span>
+          <span>{count} / 9 </span>
           <span onClick={changePage} className="right-page">
             right
           </span>
