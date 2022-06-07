@@ -27,6 +27,14 @@ section {
   }
 }
 
+button {
+  border: none;
+  outline: none;
+  background: none;
+  color: #ffc501;
+  font-size: 0.8em;
+}
+
 footer {
   display: flex;
   justify-content: center;

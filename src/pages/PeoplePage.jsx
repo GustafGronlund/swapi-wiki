@@ -1,6 +1,7 @@
 import "../styles/PeoplePage.scss";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import SWApi from "../services/SWApi";
 import extractFromUrl, { Url } from "extract-from-url";
 
@@ -8,44 +9,37 @@ const PeoplePage = () => {
   const [count, setCount] = useState(1);
   const [people, setPeople] = useState("");
   const [loadingData, setLoadingDataStatus] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [pages, setPages] = useState("");
+  const [buttonValue, setButtonValue] = useState("");
+  const page = parseInt(searchParams.get("page") ?? 1);
 
   const fetchPeople = async () => {
-    const data = await SWApi.nextPagePeople(count);
+    const data = await SWApi.nextPagePeople(page);
+    const calculatePages = data.count / 10;
     console.log("Hej här är datan: ", data);
     setPeople("");
     setPeople(data.results);
     setLoadingDataStatus(false);
-  };
-
-  if (count <= 0) {
-    setCount(9);
-    console.log("nu händer något");
-  }
-
-  if (count === 10) {
-    setCount(1);
-    console.log("nu händer något");
-  }
-
-  const changePage = async (e) => {
-    if (e.target.className === "left-page") {
-      setCount(count - 1);
-      console.log("vänster");
-      setLoadingDataStatus(true);
-      fetchPeople();
-    } else {
-      setCount(count + 1);
-      console.log("höger");
-      setLoadingDataStatus(true);
-      fetchPeople();
-    }
+    setPages(Math.ceil(calculatePages));
   };
 
   useEffect(() => {
-    fetchPeople();
+    fetchPeople(page);
+    return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(people);
+  useEffect(() => {
+    if (buttonValue === "next") {
+      fetchPeople(page);
+    }
+    if (buttonValue === "previous") {
+      fetchPeople(page);
+    }
+    setButtonValue("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, buttonValue, people]);
 
   if (loadingData === true) {
     return (
@@ -65,7 +59,7 @@ const PeoplePage = () => {
         <main>
           <section>
             {people.map((character) => {
-              const urlParts = extractFromUrl(character.url);
+              // const urlParts = extractFromUrl(character.url);
               const { path } = extractFromUrl(character.url);
               let uniquePath = path.substring(
                 path.indexOf("/") + 12,
@@ -88,13 +82,29 @@ const PeoplePage = () => {
           </section>
         </main>
         <footer>
-          <span onClick={changePage} className="left-page">
+          <button
+            onClick={() => {
+              setSearchParams({ page: page - 1 });
+              setButtonValue("previous");
+            }}
+            disabled={page === 1}
+            className="left-page"
+          >
             left
+          </button>
+          <span>
+            {page} / {pages}
           </span>
-          <span>{count} / 9 </span>
-          <span onClick={changePage} className="right-page">
+          <button
+            onClick={() => {
+              setSearchParams({ page: page + 1 });
+              setButtonValue("next");
+            }}
+            className="right-page"
+            disabled={page === 9}
+          >
             right
-          </span>
+          </button>
         </footer>
       </>
     );
